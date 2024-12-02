@@ -46,6 +46,7 @@ namespace TZEgorov
             this.button1.TabIndex = 24;
             this.button1.Text = "Восстановление структуры";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button3
             // 
@@ -59,26 +60,28 @@ namespace TZEgorov
             this.button3.TabIndex = 26;
             this.button3.Text = "Восстановление данных";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.White;
             this.button6.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button6.Location = new System.Drawing.Point(11, 381);
+            this.button6.Location = new System.Drawing.Point(11, 207);
             this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(255, 58);
             this.button6.TabIndex = 27;
             this.button6.Text = "Выход";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // Rebuild
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(275, 450);
+            this.ClientSize = new System.Drawing.Size(275, 276);
             this.ControlBox = false;
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button3);

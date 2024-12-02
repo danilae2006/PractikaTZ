@@ -114,6 +114,9 @@ namespace TZEgorov
         }
         private void Captha()
         {
+            button4.Enabled = true;
+            button5.Enabled = true;
+            textBox2.Enabled = true;
             CaptchaToImage();
             button2.Enabled = false;
             textBox1.Enabled = false;
@@ -258,6 +261,9 @@ namespace TZEgorov
         {
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            button4.Enabled = false;
+            button5.Enabled = false;
+            textBox2.Enabled = false;
         }
     }
 }

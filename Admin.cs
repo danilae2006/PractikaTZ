@@ -126,12 +126,18 @@ namespace TZEgorov
 
         private void button10_Click(object sender, EventArgs e)
         {
-
+            Rebuild rebuild = new Rebuild();
+            this.Visible = false;
+            rebuild.ShowDialog();
+            this.Close();
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-
+            ImportForm importForm = new ImportForm();
+            this.Visible = false;
+            importForm.ShowDialog();
+            this.Close();
         }
     }
 }
