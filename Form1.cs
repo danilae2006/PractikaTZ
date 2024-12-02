@@ -36,6 +36,24 @@ namespace TZEgorov
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (textBox1.Text == localAdmin.localName)
+            {
+                if (passwd.Text == localAdmin.localPassword)
+                {
+                    data.role = "Локальный";
+                    Admin admin = new Admin();
+                    this.Visible = false;
+                    admin.ShowDialog();
+                    this.Visible = true;
+                }
+                else
+                {
+                    MessageBox.Show("Неверный пароль от локального пользователя");
+                    passwd.Clear();
+                    Captha();
+                }
+                return;
+            }
             try
             {
                 if (textBox1.Text == "" && textBox2.Text == "")

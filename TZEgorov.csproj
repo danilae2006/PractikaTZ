@@ -144,6 +144,7 @@
       <DependentUpon>Admin.cs</DependentUpon>
     </Compile>
     <Compile Include="Bucket.cs" />
+    <Compile Include="localAdmin.cs" />
     <Compile Include="Rebuild.cs">
       <SubType>Form</SubType>
     </Compile>

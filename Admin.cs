@@ -21,6 +21,7 @@ namespace TZEgorov
 
         private void Admin_Load(object sender, EventArgs e)
         {
+
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             label2.Text = $"{data.usrName}" + $" {data.usrSurname}" + $" {data.usrPatr}";
@@ -31,6 +32,22 @@ namespace TZEgorov
                 button7.Location = new Point(18, 422);
                 button6.Location = new Point(18, 484);
                 this.Text = "Главное меню. Продавец";
+            }
+            else if (data.role == "Локальный")
+            {
+                    button1.Visible = false;
+                    button2.Visible = false;
+                    button3.Visible = false;
+                    button9.Visible = false;
+                    button5.Visible = false;
+                    button8.Visible = false;
+                    button4.Visible = false;
+                label2.Text = "Локальный админ";
+                button7.Location = new Point(18, 159);
+                button6.Location = new Point(18, 221);
+                this.Height = 320;
+                button10.Visible = true;
+                button11.Visible = true;
             }
         }
 
@@ -105,6 +122,16 @@ namespace TZEgorov
             this.Visible = false;
             manufacter.ShowDialog();
             this.Close();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
