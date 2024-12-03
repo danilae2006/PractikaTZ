@@ -25,7 +25,7 @@ namespace TZEgorov
         {
             InitializeComponent();
         }
-        string conString = data.conStr;
+        string conString = $@"host=127.0.0.1;uid=root;pwd=root;";
         private void button1_Click(object sender, EventArgs e)
         {
             try
