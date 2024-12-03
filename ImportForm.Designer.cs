@@ -72,6 +72,7 @@ namespace TZEgorov
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(259, 32);
             this.comboBox1.TabIndex = 27;
+            this.comboBox1.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
             // 
             // ImportForm
             // 
@@ -86,6 +87,7 @@ namespace TZEgorov
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ImportForm";
             this.Text = "Импортирование данных";
+            this.Load += new System.EventHandler(this.ImportForm_Load);
             this.ResumeLayout(false);
 
         }

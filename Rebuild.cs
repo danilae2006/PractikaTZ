@@ -25,24 +25,24 @@ namespace TZEgorov
         {
             InitializeComponent();
         }
-        string conString = $@"host=127.0.0.1;uid=root;pwd=root;";
+        string conString = $@"host=localhost;uid=root;pwd=;";
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
                 string backupPath = "Backup\\Structure.sql";
-                string databaseName = "weaponshop";
+                //string databaseName = "weaponshop";
                 using (MySqlConnection con = new MySqlConnection(conString))
                 {
                     con.Open();
-                    MySqlCommand cmdDrop = new MySqlCommand($"DROP DATABASE IF EXISTS `{databaseName}`;", con);
-                    cmdDrop.ExecuteNonQuery();
+                    //MySqlCommand cmdDrop = new MySqlCommand($"DROP DATABASE IF EXISTS `{databaseName}`;", con);
+                    //cmdDrop.ExecuteNonQuery();
 
-                    MySqlCommand cmdCreate = new MySqlCommand($"CREATE DATABASE `{databaseName}`;", con);
-                    cmdCreate.ExecuteNonQuery();
+                    //MySqlCommand cmdCreate = new MySqlCommand($"CREATE DATABASE `{databaseName}`;", con);
+                    //cmdCreate.ExecuteNonQuery();
 
-                    MySqlCommand cmdUse = new MySqlCommand($"USE `{databaseName}`;", con);
-                    cmdUse.ExecuteNonQuery();
+                    //MySqlCommand cmdUse = new MySqlCommand($"USE `{databaseName}`;", con);
+                    //cmdUse.ExecuteNonQuery();
                     string script = File.ReadAllText(backupPath);
                     MySqlScript sqlScript = new MySqlScript(con, script);
                     sqlScript.Execute();
