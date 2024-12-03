@@ -16,5 +16,21 @@ namespace TZEgorov
         {
             InitializeComponent();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены, что хотите выйти?", "Выход", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                Admin admin = new Admin();
+                this.Visible = false;
+                admin.ShowDialog();
+                this.Close();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
