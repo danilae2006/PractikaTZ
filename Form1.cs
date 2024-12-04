@@ -101,7 +101,7 @@ namespace TZEgorov
                     {
                         MessageBox.Show("Неверный пароль");
                         passwd.Text = "";
-                        Captha();
+                        Captha(); //блокировка системы после неудачного ввода капчи
 
                     }
                 }
