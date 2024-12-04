@@ -140,7 +140,7 @@ namespace TZEgorov
             for (int i = 0; i < 5; i++)
             {
                 PointF point = new PointF(i * 20, 0);
-                graphics.TranslateTransform(10, 10);
+                graphics.TranslateTransform(100, 50);
                 graphics.RotateTransform(random.Next(-10, 10));
                 graphics.DrawString(captchaText[i].ToString(), font, Brushes.Black, point);
                 graphics.ResetTransform();
