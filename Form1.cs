@@ -172,7 +172,7 @@ namespace TZEgorov
                 textBox2.Text = null;
                 this.Width = 577;
             }
-            else
+            else //Блокировка системы на 10 секунд посленеудачного ввода
             {
                 MessageBox.Show("Неверный ввод, блокировка системы на 10 секунд");
                 button5.Enabled = false;
