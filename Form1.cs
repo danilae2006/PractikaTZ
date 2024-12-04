@@ -112,7 +112,7 @@ namespace TZEgorov
                 Captha();
             }
         }
-        private void Captha()
+        private void Captha() //Создание капчи
         {
             button4.Enabled = true;
             button5.Enabled = true;
@@ -125,7 +125,7 @@ namespace TZEgorov
             passwd.Text = null;
             this.Width = 930;
         }
-        private void CaptchaToImage()
+        private void CaptchaToImage() //Отрисовка капчи
         {
             Random random = new Random();
             string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
