@@ -23,6 +23,7 @@ namespace TZEgorov
             StartPosition = FormStartPosition.CenterScreen;
             dataGridView1.CellFormatting += dataGridView1_CellFormatting;
         }
+        public int screen = 10;
         DataGridView dgv;
         string connect = data.conStr;
         DataView dv;
@@ -36,6 +37,9 @@ namespace TZEgorov
         public string photoCheck;
         public string TypeStr = "";
         public int power = 0;
+        public int minScren = 0;
+        public int maxScren = 10;
+        public int count = 0;
         private void button3_Click(object sender, EventArgs e)
         {
             Admin admin = new Admin();
@@ -93,7 +97,7 @@ namespace TZEgorov
             {
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand($"select title,Type, Description, o.Name AS 'Производитель'," +
-                    $" Power,Price,Stock_balance,Photo from products INNER JOIN `manufacture` AS `o` ON Manufacter = o.idManufacture;", con);
+                    $" Power,Price,Stock_balance,Photo from products INNER JOIN `manufacture` AS `o` ON Manufacter = o.idManufacture  LIMIT {minScren},{maxScren};", con);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -129,6 +133,8 @@ namespace TZEgorov
                     }
                 }
             }
+            count = dataGridView1.RowCount;
+            label1.Text = Convert.ToString(count);
             photoName = "";
         }
 
@@ -648,6 +654,27 @@ namespace TZEgorov
 
                     }
                 }
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (maxScren <= count)
+            {
+                maxScren += 10;
+                minScren += 10;
+                viewTable();
+            }
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if (minScren != 0)
+            {
+                maxScren -= 10;
+                minScren -= 10;
+                viewTable();
             }
         }
     }

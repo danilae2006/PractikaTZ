@@ -21,6 +21,9 @@ namespace TZEgorov
             StartPosition = FormStartPosition.CenterScreen;
         }
         string connect = data.conStr;
+        public int minScren = 0;
+        public int maxScren = 10;
+        public int count = 0;
         DataGridView dgv;
         string tableName;
         public int deletRow = 0;
@@ -59,7 +62,7 @@ namespace TZEgorov
 
                 con.Open();
 
-                MySqlCommand cmd = new MySqlCommand("select Name AS 'Производитель' from `manufacture`;", con);
+                MySqlCommand cmd = new MySqlCommand($"select Name AS 'Производитель' from `manufacture` LIMIT {minScren},{maxScren};", con);
                 cmd.ExecuteNonQuery();
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -68,6 +71,8 @@ namespace TZEgorov
                 da.Fill(dt);
 
                 dataGridView1.DataSource = dt;
+                count = dataGridView1.RowCount;
+                label1.Text = Convert.ToString(count);
             }
         }
 
@@ -137,6 +142,27 @@ namespace TZEgorov
                 }
             }
         }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (maxScren <= count)
+            {
+                maxScren += 10;
+                minScren += 10;
+                GetDate();
+            }
+            
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if (minScren != 0)
+            {
+                maxScren -= 10;
+                minScren -= 10;
+                GetDate();
+            }
         }
     }
 }

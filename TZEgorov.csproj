@@ -307,6 +307,9 @@
     <None Include="Resources\3151715653_preview_unnamed.png" />
     <None Include="Resources\5ed9e94e590e117283375a1d.png" />
     <Content Include="Resources\b1c0f062083ff2248e35b0b25331ff5a.jpg" />
+    <None Include="Resources\cd3508e5ec8babcf5b2378b74d01b650.jpg" />
+    <None Include="Resources\cd3508e5ec8babcf5b2378b74d01b6501.jpg" />
+    <None Include="Resources\dktdj.jpg" />
     <Content Include="Resources\picture.png" />
     <Content Include="Resources\png-transparent-eye-icon-eye-service-people-logo-thumbnail.png" />
   </ItemGroup>
