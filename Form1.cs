@@ -119,8 +119,6 @@ namespace TZEgorov
             textBox2.Enabled = true;
             CaptchaToImage();
             button2.Enabled = false;
-            textBox1.Enabled = false;
-            passwd.Enabled = false;
             textBox1.Text = null;
             passwd.Text = null;
             this.Width = 930;
@@ -165,12 +163,7 @@ namespace TZEgorov
         {
             if (textBox2.Text == captchaText)
             {
-                MessageBox.Show("Успешный ввод");
-                button2.Enabled = true;
-                textBox1.Enabled = true;
-                passwd.Enabled = true;
-                textBox2.Text = null;
-                this.Width = 577;
+                button2_Click(sender, e);
             }
             else //Блокировка системы на 10 секунд посленеудачного ввода
             {
