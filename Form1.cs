@@ -156,7 +156,7 @@ namespace TZEgorov
             pictureBox2.Image = bmp;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e) //Смена капчи по нажатию на кнопку
         {
             Captha();
         }
