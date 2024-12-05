@@ -45,6 +45,7 @@ namespace TZEgorov
             GetDate();
             tableName = "client";
             label4.ForeColor = Color.Aqua;
+            dgvUpdateForm.Rows[0].Selected = false;
         }
         private void GetDate()
         {
@@ -89,6 +90,7 @@ namespace TZEgorov
                 this.dgvUpdateForm.Columns["idClient"].Visible = false;
                 count = dgvUpdateForm.RowCount;
                 label3.Text = Convert.ToString("Общее кол-во строк: " + count);
+                dgvUpdateForm.RowHeadersVisible = false;
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -429,17 +431,38 @@ namespace TZEgorov
 
         private void label9_MouseHover(object sender, EventArgs e)
         {
-            label9.ForeColor = Color.Red;
+            if (label9.ForeColor == Color.Aqua)
+            {
+
+            }
+            else
+            {
+                label9.ForeColor = Color.Red;
+            }
         }
 
         private void label6_MouseHover(object sender, EventArgs e)
         {
-            label6.ForeColor = Color.Red;
+            if (label6.ForeColor == Color.Aqua)
+            {
+
+            }
+            else
+            {
+                label6.ForeColor = Color.Red;
+            }
         }
 
         private void label5_MouseHover(object sender, EventArgs e)
         {
-            label5.ForeColor = Color.Red;
+            if (label5.ForeColor == Color.Aqua)
+            {
+
+            }
+            else
+            {
+                label5.ForeColor = Color.Red;
+            }
         }
 
         private void label4_MouseHover(object sender, EventArgs e)

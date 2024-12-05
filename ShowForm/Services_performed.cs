@@ -39,6 +39,7 @@ namespace TZEgorov.ShowForm
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             GetDate();
+            dataGridView1.Rows[0].Selected = false;
         }
         private void GetDate()
         {
@@ -48,7 +49,7 @@ namespace TZEgorov.ShowForm
 
                 con.Open();
 
-                MySqlCommand cmd = new MySqlCommand("select id, o.title AS 'Услуга', n.Surname AS 'Клиент', Date AS 'Дата проведения', Status AS 'Статус' from `services_performed` INNER JOIN `services` AS `o` ON idServices_performed = o.idServices INNER JOIN  `client` AS `n` ON Client = n.idClient;", con);
+                MySqlCommand cmd = new MySqlCommand("select idServices_performed, o.title AS 'Услуга', n.Surname AS 'Клиент', Date AS 'Дата проведения', Status AS 'Статус' from `services_performed` INNER JOIN `services` AS `o` ON idServices_performed = o.idServices INNER JOIN  `client` AS `n` ON Client = n.idClient;", con);
                 cmd.ExecuteNonQuery();
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -57,7 +58,9 @@ namespace TZEgorov.ShowForm
                 da.Fill(dt);
 
                 dataGridView1.DataSource = dt;
-                dataGridView1.Columns["id"].Visible = false;
+                dataGridView1.Columns["idServices_performed"].Visible = false;
+                dataGridView1.RowHeadersVisible = false;
+                dataGridView1.Rows[0].Selected = false;
             }
         }
 
@@ -98,10 +101,10 @@ namespace TZEgorov.ShowForm
             int rowIndex = e.RowIndex;
             if (rowIndex >= 0)
             {
-                int Names = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["id"].Value.ToString());
+                int Names = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["idServices_performed"].Value.ToString());
                 comboBox3.Enabled = true;
                 button2.Enabled = true;
-                string sqlQuery = "select id, Status from `services_performed` WHERE id=" + Names + ";";
+                string sqlQuery = "select idServices_performed, Status from `services_performed` WHERE idServices_performed=" + Names + ";";
 
                 MySqlConnection con = new MySqlConnection();
                 con.ConnectionString = connect;
