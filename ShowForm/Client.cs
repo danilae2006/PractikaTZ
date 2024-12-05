@@ -24,6 +24,10 @@ namespace TZEgorov
         string connect = data.conStr;
         DataGridView dgv;
         string tableName;
+        public int minScren = 0;
+        public int maxScren = 10;
+        public int count = 0;
+        public string search = "";
         private void button2_Click(object sender, EventArgs e)
         {
             Admin admin = new Admin();
@@ -47,7 +51,7 @@ namespace TZEgorov
 
                 con.Open();
 
-                MySqlCommand cmd = new MySqlCommand("select idClient, Name AS 'Имя', Surname AS 'Фамилия', Phone AS 'Телефон', Pasport AS 'Паспорт' from `client`;", con);
+                MySqlCommand cmd = new MySqlCommand($"select idClient, Name AS 'Имя', Surname AS 'Фамилия', Phone AS 'Телефон', Pasport AS 'Паспорт' from `client` LIMIT {minScren},{maxScren};", con);
                 cmd.ExecuteNonQuery();
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -57,9 +61,32 @@ namespace TZEgorov
 
                 dgvUpdateForm.DataSource = dt;
                 this.dgvUpdateForm.Columns["idClient"].Visible = false;
+                count = dgvUpdateForm.RowCount;
+                label3.Text = Convert.ToString("Общее кол-во строк: "+count);
             }
         }
+        //private void Search()
+        //{
+        //    using (MySqlConnection con = new MySqlConnection())
+        //    {
+        //        con.ConnectionString = connect;
 
+        //        con.Open();
+
+        //        MySqlCommand cmd = new MySqlCommand($"select idClient, Name AS 'Имя', Surname AS 'Фамилия', Phone AS 'Телефон', Pasport AS 'Паспорт' from `client` WHERE Name LIKE '%{search}%' OR Surname LIKE '%{search}%' LIMIT {minScren},{maxScren};", con);
+        //        cmd.ExecuteNonQuery();
+
+        //        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+        //        DataTable dt = new DataTable();
+
+        //        da.Fill(dt);
+
+        //        dgvUpdateForm.DataSource = dt;
+        //        this.dgvUpdateForm.Columns["idClient"].Visible = false;
+        //        count = dgvUpdateForm.RowCount;
+        //        label3.Text = Convert.ToString("Общее кол-во строк: " + count);
+        //    }
+        //}
         private void button1_Click(object sender, EventArgs e)
         {
             AddClient addClient = new AddClient();
@@ -243,6 +270,36 @@ namespace TZEgorov
                 textBox2.Text = char.ToUpper(textBox2.Text[0]) + textBox2.Text.Substring(1);
                 textBox2.SelectionStart = cursorPosition;
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (maxScren <= count)
+            {
+                minScren += 10;
+                //Search();
+            }
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if (minScren != 0)
+            {
+                minScren -= 10;
+                //Search();
+            }
+        }
+
+        private void textBox3_Click(object sender, EventArgs e)
+        {
+            textBox3.Text = "";
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            search = textBox3.Text;
+            //Search();
         }
     }
 }
