@@ -65,28 +65,28 @@ namespace TZEgorov
                 label3.Text = Convert.ToString("Общее кол-во строк: "+count);
             }
         }
-        //private void Search()
-        //{
-        //    using (MySqlConnection con = new MySqlConnection())
-        //    {
-        //        con.ConnectionString = connect;
+        private void Search()
+        {
+            using (MySqlConnection con = new MySqlConnection())
+            {
+                con.ConnectionString = connect;
 
-        //        con.Open();
+                con.Open();
 
-        //        MySqlCommand cmd = new MySqlCommand($"select idClient, Name AS 'Имя', Surname AS 'Фамилия', Phone AS 'Телефон', Pasport AS 'Паспорт' from `client` WHERE Name LIKE '%{search}%' OR Surname LIKE '%{search}%' LIMIT {minScren},{maxScren};", con);
-        //        cmd.ExecuteNonQuery();
+                MySqlCommand cmd = new MySqlCommand($"select idClient, Name AS 'Имя', Surname AS 'Фамилия', Phone AS 'Телефон', Pasport AS 'Паспорт' from `client` WHERE Name LIKE '%{search}%' OR Surname LIKE '%{search}%' LIMIT {minScren},{maxScren};", con);
+                cmd.ExecuteNonQuery();
 
-        //        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-        //        DataTable dt = new DataTable();
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
 
-        //        da.Fill(dt);
+                da.Fill(dt);
 
-        //        dgvUpdateForm.DataSource = dt;
-        //        this.dgvUpdateForm.Columns["idClient"].Visible = false;
-        //        count = dgvUpdateForm.RowCount;
-        //        label3.Text = Convert.ToString("Общее кол-во строк: " + count);
-        //    }
-        //}
+                dgvUpdateForm.DataSource = dt;
+                this.dgvUpdateForm.Columns["idClient"].Visible = false;
+                count = dgvUpdateForm.RowCount;
+                label3.Text = Convert.ToString("Общее кол-во строк: " + count);
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             AddClient addClient = new AddClient();
@@ -287,7 +287,7 @@ namespace TZEgorov
             if (minScren != 0)
             {
                 minScren -= 10;
-                //Search();
+                Search();
             }
         }
 
@@ -299,7 +299,7 @@ namespace TZEgorov
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             search = textBox3.Text;
-            //Search();
+            Search();
         }
     }
 }
