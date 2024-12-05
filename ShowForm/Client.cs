@@ -27,6 +27,8 @@ namespace TZEgorov
         public int minScren = 0;
         public int maxScren = 10;
         public int count = 0;
+        public int countlast;
+
         public string search = "";
         private void button2_Click(object sender, EventArgs e)
         {
@@ -42,6 +44,7 @@ namespace TZEgorov
             this.MinimizeBox = false;
             GetDate();
             tableName = "client";
+            label4.ForeColor = Color.Aqua;
         }
         private void GetDate()
         {
@@ -51,7 +54,7 @@ namespace TZEgorov
 
                 con.Open();
 
-                MySqlCommand cmd = new MySqlCommand($"select idClient, Name AS 'Имя', Surname AS 'Фамилия', Phone AS 'Телефон', Pasport AS 'Паспорт' from `client` LIMIT {minScren},{maxScren};", con);
+                MySqlCommand cmd = new MySqlCommand($"select * from `client`;", con);
                 cmd.ExecuteNonQuery();
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -61,9 +64,10 @@ namespace TZEgorov
 
                 dgvUpdateForm.DataSource = dt;
                 this.dgvUpdateForm.Columns["idClient"].Visible = false;
-                count = dgvUpdateForm.RowCount;
-                label3.Text = Convert.ToString("Общее кол-во строк: "+count);
+                countlast = dgvUpdateForm.RowCount;
+                label3.Text = Convert.ToString("Общее кол-во строк: " + count);
             }
+            Search();
         }
         private void Search()
         {
@@ -106,63 +110,63 @@ namespace TZEgorov
             else
             {
                 int rowIndex1 = e.RowIndex;
-            if (rowIndex1 >= 0)
-            {
-                if (e.Button == MouseButtons.Right)
+                if (rowIndex1 >= 0)
                 {
-                    try
+                    if (e.Button == MouseButtons.Right)
                     {
+                        try
+                        {
 
-                        dgv = (DataGridView)sender;
-                        int rowIndex = e.RowIndex;
-                        dgv.Rows[rowIndex].Selected = true;
-                        string cell0 = dgv.Rows[rowIndex].Cells[0].Value.ToString();
-                        string strCmd = "DELETE FROM " + tableName + " WHERE ";
-                        string strCon = data.conStr;
-                        switch (tableName)
-                        {
-                            case "client":
-                                strCmd += "idClient='" + cell0 + "';";
-                                break;
-                        }
-                        using (MySqlConnection con = new MySqlConnection())
-                        {
-                            try
+                            dgv = (DataGridView)sender;
+                            int rowIndex = e.RowIndex;
+                            dgv.Rows[rowIndex].Selected = true;
+                            string cell0 = dgv.Rows[rowIndex].Cells[0].Value.ToString();
+                            string strCmd = "DELETE FROM " + tableName + " WHERE ";
+                            string strCon = data.conStr;
+                            switch (tableName)
                             {
-
-                                con.ConnectionString = strCon;
-
-                                con.Open();
-
-
-                                MySqlCommand cmd = new MySqlCommand(strCmd, con);
-
-                                DialogResult dr = MessageBox.Show("Удалить запись ?", "Внимание!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                                if (dr == DialogResult.Yes)
+                                case "client":
+                                    strCmd += "idClient='" + cell0 + "';";
+                                    break;
+                            }
+                            using (MySqlConnection con = new MySqlConnection())
+                            {
+                                try
                                 {
-                                    int res = cmd.ExecuteNonQuery();
-                                    MessageBox.Show("Удалено " + res.ToString(), "Внимание!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
-                                    GetDate();
+                                    con.ConnectionString = strCon;
+
+                                    con.Open();
+
+
+                                    MySqlCommand cmd = new MySqlCommand(strCmd, con);
+
+                                    DialogResult dr = MessageBox.Show("Удалить запись ?", "Внимание!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                                    if (dr == DialogResult.Yes)
+                                    {
+                                        int res = cmd.ExecuteNonQuery();
+                                        MessageBox.Show("Удалено " + res.ToString(), "Внимание!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                                        GetDate();
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show("Запись связана с другой таблицей. Невозможно удалить");
                                 }
                             }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Запись связана с другой таблицей. Невозможно удалить");
-                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Ошибка: " + ex.Message);
                         }
                     }
-                    catch (Exception ex)
+                    else if (e.Button == MouseButtons.Left)
                     {
-                        MessageBox.Show("Ошибка: " + ex.Message);
+
                     }
                 }
-                else if (e.Button == MouseButtons.Left)
-                {
-
-                }
             }
-        }
         }
 
         private void dgvUpdateForm_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -225,17 +229,17 @@ namespace TZEgorov
                         con.Open();
                         MySqlCommand cmd = new MySqlCommand(sqlQuery, con);
                         int res = cmd.ExecuteNonQuery();
-                    
 
-                    if (res == 1)
-                    {
-                        MessageBox.Show("данные обновлены");
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("данные не обновлены");
-                    }
+                        if (res == 1)
+                        {
+                            MessageBox.Show("данные обновлены");
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("данные не обновлены");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -277,9 +281,47 @@ namespace TZEgorov
             if (maxScren <= count)
             {
                 minScren += 10;
-                //Search();
+                if (minScren == 0)
+                {
+                    label4.ForeColor = Color.Aqua;
+                    label5.ForeColor = Color.Black;
+                    label6.ForeColor = Color.Black;
+                    label9.ForeColor = Color.Black;
+                }
+                else if (minScren == 10)
+                {
+                    label4.ForeColor = Color.Black;
+                    label5.ForeColor = Color.Aqua;
+                    label6.ForeColor = Color.Black;
+                    label9.ForeColor = Color.Black;
+                }
+                else if (minScren == 20)
+                {
+                    label4.ForeColor = Color.Black;
+                    label5.ForeColor = Color.Black;
+                    label6.ForeColor = Color.Aqua;
+                    label9.ForeColor = Color.Black;
+                }
+                else if (minScren == 30)
+                {
+                    label4.ForeColor = Color.Black;
+                    label5.ForeColor = Color.Black;
+                    label6.ForeColor = Color.Black;
+                    label9.ForeColor = Color.Aqua;
+                }
+                Search();
             }
+            else
+            {
+                minScren = 0;
+                maxScren = 10;
+                label4.ForeColor = Color.Aqua;
+                label5.ForeColor = Color.Black;
+                label6.ForeColor = Color.Black;
+                label9.ForeColor = Color.Black;
+                Search();
 
+            }
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -287,8 +329,47 @@ namespace TZEgorov
             if (minScren != 0)
             {
                 minScren -= 10;
+                if (minScren == 0)
+                {
+                    label4.ForeColor = Color.Aqua;
+                    label5.ForeColor = Color.Black;
+                    label6.ForeColor = Color.Black;
+                    label9.ForeColor = Color.Black;
+                }
+                else if (minScren == 10)
+                {
+                    label4.ForeColor = Color.Black;
+                    label5.ForeColor = Color.Aqua;
+                    label6.ForeColor = Color.Black;
+                    label9.ForeColor = Color.Black;
+                }
+                else if (minScren == 20)
+                {
+                    label4.ForeColor = Color.Black;
+                    label5.ForeColor = Color.Black;
+                    label6.ForeColor = Color.Aqua;
+                    label9.ForeColor = Color.Black;
+                }
+                else if (minScren == 30)
+                {
+                    label4.ForeColor = Color.Black;
+                    label5.ForeColor = Color.Black;
+                    label6.ForeColor = Color.Black;
+                    label9.ForeColor = Color.Aqua;
+                }
                 Search();
             }
+            else
+            {
+                minScren = countlast - 1;
+                maxScren = 10;
+                label4.ForeColor = Color.Black;
+                label5.ForeColor = Color.Black;
+                label6.ForeColor = Color.Black;
+                label9.ForeColor = Color.Aqua;
+                Search();
+            }
+
         }
 
         private void textBox3_Click(object sender, EventArgs e)
@@ -299,7 +380,126 @@ namespace TZEgorov
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             search = textBox3.Text;
+            minScren = 0;
+            maxScren = 10;
             Search();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            minScren = 0;
+            Search();
+            label4.ForeColor = Color.Aqua;
+            label5.ForeColor = Color.Black;
+            label6.ForeColor = Color.Black;
+            label9.ForeColor = Color.Black;
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            minScren = 10;
+            Search();
+            label4.ForeColor = Color.Black;
+            label5.ForeColor = Color.Aqua;
+            label6.ForeColor = Color.Black;
+            label9.ForeColor = Color.Black;
+
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            minScren = 20;
+            Search();
+            label4.ForeColor = Color.Black;
+            label5.ForeColor = Color.Black;
+            label6.ForeColor = Color.Aqua;
+            label9.ForeColor = Color.Black;
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+            minScren = 30;
+            Search();
+            label4.ForeColor = Color.Black;
+            label5.ForeColor = Color.Black;
+            label6.ForeColor = Color.Black;
+            label9.ForeColor = Color.Aqua;
+        }
+
+        private void label9_MouseHover(object sender, EventArgs e)
+        {
+            label9.ForeColor = Color.Red;
+        }
+
+        private void label6_MouseHover(object sender, EventArgs e)
+        {
+            label6.ForeColor = Color.Red;
+        }
+
+        private void label5_MouseHover(object sender, EventArgs e)
+        {
+            label5.ForeColor = Color.Red;
+        }
+
+        private void label4_MouseHover(object sender, EventArgs e)
+        {
+            if (label4.ForeColor == Color.Aqua)
+            {
+
+            }
+            else
+            {
+                label4.ForeColor = Color.Red;
+            }
+        }
+
+        private void label9_MouseLeave(object sender, EventArgs e)
+        {
+            if (label9.ForeColor == Color.Aqua)
+            {
+
+            }
+            else
+            {
+                label9.ForeColor = Color.Black;
+            }
+        }
+
+        private void label6_MouseLeave(object sender, EventArgs e)
+        {
+            if (label6.ForeColor == Color.Aqua)
+            {
+
+            }
+            else
+            {
+                label6.ForeColor = Color.Black;
+            }
+        }
+
+        private void label5_MouseLeave(object sender, EventArgs e)
+        {
+            if (label5.ForeColor == Color.Aqua)
+            {
+
+            }
+            else
+            {
+                label5.ForeColor = Color.Black;
+            }
+        }
+
+        private void label4_MouseLeave(object sender, EventArgs e)
+        {
+            if (label4.ForeColor == Color.Aqua)
+            {
+
+            }
+            else
+            {
+                label4.ForeColor = Color.Black;
+            }
         }
     }
 }
