@@ -137,6 +137,12 @@
     <Compile Include="AddForm\AddUsers.Designer.cs">
       <DependentUpon>AddUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddForm\Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddForm\Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Admin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +250,9 @@
     <EmbeddedResource Include="AddForm\AddUsers.resx">
       <DependentUpon>AddUsers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AddForm\Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Admin.resx">
       <DependentUpon>Admin.cs</DependentUpon>
     </EmbeddedResource>
@@ -315,6 +324,7 @@
     <None Include="Resources\add.png" />
     <None Include="Resources\3151715653_preview_unnamed.png" />
     <None Include="Resources\5ed9e94e590e117283375a1d.png" />
+    <None Include="png-clipart-computer-icons-user-set-up-computer-program-business.png" />
     <Content Include="Resources\b1c0f062083ff2248e35b0b25331ff5a.jpg" />
     <None Include="Resources\cd3508e5ec8babcf5b2378b74d01b650.jpg" />
     <None Include="Resources\cd3508e5ec8babcf5b2378b74d01b6501.jpg" />

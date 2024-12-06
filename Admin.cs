@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -17,8 +18,62 @@ namespace TZEgorov
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
+            InitializeIdleTimer();
+            LoadIdleTimeout();
+        }
+        private Timer idleTimer;
+        private int idleTimeout = Convert.ToInt32(Properties.Settings.Default.Time);
+
+        #region Таймер
+        private void LoadIdleTimeout()
+        {
+            if (int.TryParse(ConfigurationManager.AppSettings["IdleTimeout"], out int timeout))
+            {
+                idleTimeout = timeout * 1000;
+            }
+            else
+            {
+                idleTimeout = 30000;
+            }
         }
 
+        private void InitializeIdleTimer()
+        {
+            idleTimer = new Timer();
+            idleTimer.Interval = idleTimeout;
+            idleTimer.Tick += IdleTimer_Tick;
+            idleTimer.Start();
+            this.MouseMove += ResetIdleTimer;
+            this.KeyPress += ResetIdleTimer;
+            this.KeyDown += ResetIdleTimer;
+            this.MouseClick += ResetIdleTimer;
+        }
+
+        private void ResetIdleTimer(object sender, EventArgs e)
+        {
+            idleTimer.Stop();
+            idleTimer.Start();
+        }
+
+        private void IdleTimer_Tick(object sender, EventArgs e)
+        {
+            idleTimer.Stop();
+            this.Hide();
+
+            using (var loginForm = new Form1())
+            {
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+                    this.Show();
+                }
+                else
+                {
+                    Application.Exit();
+                }
+            }
+        }
+
+        #endregion
         private void Admin_Load(object sender, EventArgs e)
         {
 

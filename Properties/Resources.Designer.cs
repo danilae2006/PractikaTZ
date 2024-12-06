@@ -133,6 +133,16 @@ namespace TZEgorov.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap png_clipart_computer_icons_user_set_up_computer_program_business {
+            get {
+                object obj = ResourceManager.GetObject("png-clipart-computer-icons-user-set-up-computer-program-business", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap png_transparent_eye_icon_eye_service_people_logo_thumbnail {
             get {
                 object obj = ResourceManager.GetObject("png-transparent-eye-icon-eye-service-people-logo-thumbnail", resourceCulture);

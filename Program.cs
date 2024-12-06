@@ -16,12 +16,7 @@ namespace TZEgorov
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Admin());
-            data.role = "Администратор";
-            data.usrName = "Данила";
-            data.usrSurname = "Егоров";
-            data.usrPatr = "Михайлович";
-            data.userId = 1;
+            Application.Run(new Form1());
         }
     }
 }

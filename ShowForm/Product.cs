@@ -53,7 +53,7 @@ namespace TZEgorov
             if (data.role == "Продавец")
             {
                 button1.Visible = false;
-                button2.Visible = false;
+                button2.Visible = false;                                                     
             }
             this.MaximizeBox = false;
             this.MinimizeBox = false;

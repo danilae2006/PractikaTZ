@@ -14,6 +14,7 @@ using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Drawing.Drawing2D;
 using System.Data.SqlClient;
+using TZEgorov.AddForm;
 
 namespace TZEgorov
 {
@@ -26,6 +27,7 @@ namespace TZEgorov
         }
         private string captchaText;
         string conString = data.conStr;
+        public int vxod = 0;
         private void button1_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Вы уверены, что хотите выйти?", "Выход", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -87,11 +89,12 @@ namespace TZEgorov
                     data.usrPatr = userPatr;
                     data.userId = Convert.ToInt32(userId);
 
-                    if (hashPassword == dt.Rows[0].ItemArray.GetValue(5).ToString())
+                    if (hashPassword == dt.Rows[0].ItemArray.GetValue(5).ToString() && vxod == 0)
                     {
                         role = dt.Rows[0].ItemArray.GetValue(6).ToString();
                         data.role = role;
                         MessageBox.Show("Вы успешно авторизовались");
+                        vxod = 1;
                         Admin admin = new Admin();
                         this.Visible = false;
                         admin.ShowDialog();
@@ -257,6 +260,14 @@ namespace TZEgorov
             button4.Enabled = false;
             button5.Enabled = false;
             textBox2.Enabled = false;
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+            this.Visible = false;
+            settings.ShowDialog();
+            this.Close();
         }
     }
 }
