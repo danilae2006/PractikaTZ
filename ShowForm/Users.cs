@@ -172,8 +172,9 @@ namespace TZEgorov.ShowForm
                 }
                 else if (e.Button == MouseButtons.Left)
                 {
-                    string UserId = dgvUpdateForm.Rows[e.RowIndex].Cells["UserID"].Value.ToString();
-
+                    string UserID = dgvUpdateForm.Rows[e.RowIndex].Cells["UserID"].Value.ToString();
+                    DataUser dataUser = new DataUser(UserID);
+                    dataUser.ShowDialog();
                 }
             }
         }
