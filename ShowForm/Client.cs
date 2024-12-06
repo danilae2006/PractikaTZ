@@ -28,6 +28,7 @@ namespace TZEgorov
         public int maxScren = 10;
         public int count = 0;
         public int countlast;
+        public int countAll;
 
         public string search = "";
         private void button2_Click(object sender, EventArgs e)
@@ -66,7 +67,9 @@ namespace TZEgorov
                 dgvUpdateForm.DataSource = dt;
                 this.dgvUpdateForm.Columns["idClient"].Visible = false;
                 countlast = dgvUpdateForm.RowCount;
-                label3.Text = Convert.ToString("Общее кол-во строк: " + count);
+                label3.Text = Convert.ToString("Выведенное кол-во записей: " + count);
+                countAll = dgvUpdateForm.RowCount;
+                label10.Text = Convert.ToString("Общее кол-во записей: " + countAll);
             }
             Search();
         }
@@ -89,7 +92,7 @@ namespace TZEgorov
                 dgvUpdateForm.DataSource = dt;
                 this.dgvUpdateForm.Columns["idClient"].Visible = false;
                 count = dgvUpdateForm.RowCount;
-                label3.Text = Convert.ToString("Общее кол-во строк: " + count);
+                label3.Text = Convert.ToString("Выведенное кол-во записей: " + count);
                 dgvUpdateForm.RowHeadersVisible = false;
             }
         }

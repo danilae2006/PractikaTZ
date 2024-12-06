@@ -78,16 +78,29 @@ namespace TZEgorov.ShowForm
 
         private void dgvUpdateForm_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            string val = e.Value.ToString();
             if (e.ColumnIndex == 8 && e.Value != null && m1 == 0)
             {
                 dgvUpdateForm.Rows[e.RowIndex].Tag = e.Value;
-                e.Value = new String('\u25CF', e.Value.ToString().Length);
+                e.Value = new String('\u002A', e.Value.ToString().Length);
 
             }
             else if (e.ColumnIndex == 7 && e.Value != null && m2 == 0)
             {
-                dgvUpdateForm.Rows[e.RowIndex].Tag = e.Value;
-                e.Value = new String('\u25CF', e.Value.ToString().Length);
+                //dgvUpdateForm.Rows[e.RowIndex].Tag = e.Value;
+                //e.Value = new String('\u25CF', e.Value.ToString().Length);
+                int len = val.Length;
+                e.Value = val.Substring(0, 7) + "****" + val.Substring(len - 5);
+                
+
+            }
+            else if (e.ColumnIndex == 2 && e.Value != null && m2 == 0)
+            {
+                //dgvUpdateForm.Rows[e.RowIndex].Tag = e.Value;
+                //e.Value = new String('\u25CF', e.Value.ToString().Length);
+                int len = val.Length;
+                e.Value = val.Substring(0, 3) + "****";
+
 
             }
             else if (m1 == 1 && m2 == 0)
@@ -159,24 +172,8 @@ namespace TZEgorov.ShowForm
                 }
                 else if (e.Button == MouseButtons.Left)
                 {
-                    if (e.ColumnIndex == 8 && m1 == 0)
-                    {
-                        m1 = 1;
+                    string UserId = dgvUpdateForm.Rows[e.RowIndex].Cells["UserID"].Value.ToString();
 
-                    }
-                    else if (e.ColumnIndex == 7 && m2 == 0)
-                    {
-                        m2 = 1;
-
-                    }
-                    else if (e.ColumnIndex == 8 && m1 == 1)
-                    {
-                        m1 = 0;
-                    }
-                    else if (e.ColumnIndex == 7 && m2 == 1)
-                    {
-                        m2 = 0;
-                    }
                 }
             }
         }
